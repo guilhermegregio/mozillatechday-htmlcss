@@ -1,17 +1,8 @@
-var lista = [
-	{
-		todo: 'adsfksjldfhlkjadsfhkladsjf',
-		done: true
-	},
-	{
-		todo: 'outro',
-		done: false
-	}
-]
+var lista = JSON.parse(localStorage.getItem('lista')) || [];
 
 $(function () {
 
-	
+	console.log(lista);
 	reloadList();
 
 	$('.addTodo').on('click', function(){
@@ -21,6 +12,7 @@ $(function () {
 		}
 		
 		lista.push(todo);
+		localStorage.setItem('lista', JSON.stringify(lista));
 		reloadList();
 	});	
 });
