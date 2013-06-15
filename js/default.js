@@ -1,8 +1,3 @@
-var $  = function (elem) {
-	return document.querySelectorAll(elem);
-}
-
-
 var lista = [
 	{
 		todo: 'adsfksjldfhlkjadsfhkladsjf',
@@ -14,14 +9,32 @@ var lista = [
 	}
 ]
 
-window.load = function () {
+$(function () {
 
+	
+	reloadList();
+
+	$('.addTodo').on('click', function(){
+		var todo = {
+			todo: $('#todo').val(),
+			done: false
+		}
+		
+		lista.push(todo);
+		reloadList();
+	});	
+});
+
+var reloadList = function(){
 	var lis = [];
+	$('.list-item ul').empty();
 	lista.forEach(function(item){
-		var li = "<li>" + item.todo + "</li>";
+		var li = $("<li>");
+		var check = $('<input/>', {type: 'checkbox'});
+
+		li.append(check).append(item.todo);
+
 		lis.push(li);
 	});
-
-	$('.list-item ul')[0].append(lis);	
+	$('.list-item ul').append(lis);
 }
-
